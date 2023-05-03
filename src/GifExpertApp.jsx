@@ -5,11 +5,17 @@ import { AddCategory, GifGrid } from "./components";
 export const GifExpertApp = () => {
 
     const [categories, setCategories] = useState(['One Punch']);
-    console.log(categories);
 
     const onAddCategory = (newCategory) => {
         if (categories.includes(newCategory)) return;
         setCategories([newCategory, ...categories]);
+    }
+
+    const onSubstractCategory = (category) => {
+        const newCategories = categories.slice();
+        const index = newCategories.findIndex(cat => (cat === category));
+        newCategories.splice(index, 1);
+        setCategories(newCategories);
     }
 
     return (
@@ -22,7 +28,9 @@ export const GifExpertApp = () => {
             {
                 categories.map(category => (
                     <GifGrid key={category}
-                        category={category} />
+                        category={category}
+                        onSubsCategory={(event) => onSubstractCategory(event)}
+                    />
                 ))
             }
         </>

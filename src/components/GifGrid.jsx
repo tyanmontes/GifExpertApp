@@ -1,13 +1,16 @@
 import { GifItem } from "./GifItem";
 import { useFetchGifs } from "../hooks/UseFetchGifs";
 
-export const GifGrid = ({ category }) => {
+export const GifGrid = ({ category, onSubsCategory }) => {
 
     const { images, isLoading } = useFetchGifs(category);
 
     return (
-        <>
-            <h3>{category}</h3>
+        <div className="block">
+            <div className="title">
+                <h3>{category}</h3>
+                <button onClick={() => onSubsCategory(category)}>X</button >
+            </div>
             {
                 isLoading && (<h2>Cargando...</h2>)
             }
@@ -19,6 +22,6 @@ export const GifGrid = ({ category }) => {
                     ))
                 }
             </div>
-        </>
+        </div>
     )
 }
